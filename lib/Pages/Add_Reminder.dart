@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,10 +15,11 @@ class _Add_ReminderState extends State<Add_Reminder> {
   String title = '';
   String notes = '';
   bool isSwitched = false;
-  bool isTime = false;
-  DateTime _dateTime = null;
+  bool isTime = true;
+  DateTime _dateTime = DateTime.now();
   DateTime time = null;
-  DateTime initial_datetime = DateTime.now();
+  // DateTime now = new DateTime.now();
+  DateTime date = DateTime.now().subtract(Duration(hours: 10));
 
   @override
   Widget build(BuildContext context) {
@@ -123,8 +126,8 @@ class _Add_ReminderState extends State<Add_Reminder> {
                           isSwitched = value;
                         });
                       },
-                      activeTrackColor: Colors.lightBlueAccent,
-                      activeColor: Colors.blue,
+                      activeTrackColor: Colors.lightBlueAccent.shade200,
+                      activeColor: Colors.blue.shade500,
                     ),
                   ),
                 ],
@@ -138,7 +141,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
                       EdgeInsets.symmetric(vertical: 5.0, horizontal: 12.0),
                   // margin: EdgeInsets.all(8.0),
                   child: SizedBox(
-                    height: 125.0,
+                    height: 80.0,
                     child: CupertinoDatePicker(
                       backgroundColor: Colors.white,
                       initialDateTime: DateTime.now(),
@@ -146,10 +149,77 @@ class _Add_ReminderState extends State<Add_Reminder> {
                       onDateTimeChanged: (dateTime) {
                         setState(() {
                           _dateTime = dateTime;
+                          // date = dateTime;
                         });
                         // print(_dateTime);
                       },
                     ),
+                  ),
+                );
+              },
+            ),
+            ConditionalBuilder(
+              condition: date.isBefore(_dateTime) && isSwitched,
+              builder: (context) {
+                return Container(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 5.0, horizontal: 12.0),
+                  // margin: EdgeInsets.all(8.0),
+
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            margin: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 10.0),
+                            padding: EdgeInsets.only(left: 12.0),
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              'Remind me on a Time',
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                color: Colors.blue.shade300,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(left: 60),
+                            child: Switch(
+                              value: isTime,
+                              inactiveThumbColor: Colors.white,
+                              inactiveTrackColor: Colors.grey.shade300,
+                              onChanged: (value) {
+                                setState(() {
+                                  isTime = value;
+                                });
+                              },
+                              activeTrackColor: Colors.lightBlueAccent.shade200,
+                              activeColor: Colors.blue.shade500,
+                            ),
+                          ),
+                        ],
+                      ),
+                      ConditionalBuilder(
+                        condition:
+                            date.isBefore(_dateTime) && isSwitched && isTime,
+                        builder: (context) {
+                          return SizedBox(
+                            height: 80.0,
+                            child: CupertinoDatePicker(
+                              backgroundColor: Colors.white,
+                              initialDateTime: DateTime.now(),
+                              mode: CupertinoDatePickerMode.time,
+                              onDateTimeChanged: (dateTime) {
+                                setState(() {
+                                  time = dateTime;
+                                });
+                                // print(time);
+                              },
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 );
               },
