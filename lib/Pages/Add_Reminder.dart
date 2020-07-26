@@ -20,6 +20,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
   bool isTime = false;
   DateTime _dateTime = DateTime.now();
   DateTime time = null;
+  bool email = false;
   // DateTime now = new DateTime.now();
   DateTime date = DateTime.now().subtract(Duration(days: 1));
 
@@ -79,9 +80,15 @@ class _Add_ReminderState extends State<Add_Reminder> {
                 ),
               ),
             ),
+            SizedBox(
+              width: 300.0,
+              child: Divider(
+                color: Colors.amberAccent,
+              ),
+            ),
             //Second text field to input notes
             Padding(
-              padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 12.0),
+              padding: const EdgeInsets.fromLTRB(12.0, 4.0, 12.0, 4.0),
               child: Card(
                 margin: EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 2.0),
                 color: Colors.transparent,
@@ -113,10 +120,69 @@ class _Add_ReminderState extends State<Add_Reminder> {
                 ),
               ),
             ),
+            SizedBox(
+              width: 300.0,
+              child: Divider(
+                color: Colors.amberAccent,
+              ),
+            ),
+            Row(
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 0.0),
+                  padding: EdgeInsets.only(left: 12.0),
+                  alignment: Alignment.topLeft,
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: Icon(
+                          Icons.email,
+                          color: Colors.amber,
+                          size: 30.0,
+                        ),
+                      ),
+                      Text(
+                        '   Email',
+                        style: TextStyle(
+                          color: Colors.amber,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 160),
+                        color: Colors.transparent,
+                        child: Theme(
+                          data: Theme.of(context).copyWith(
+                            unselectedWidgetColor: Colors.white,
+                          ),
+                          child: Checkbox(
+                            value: email,
+                            activeColor: Colors.amber,
+                            onChanged: (bool value) {
+                              setState(() {
+                                email = value;
+                              });
+                              // print(email);
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              width: 300.0,
+              child: Divider(
+                color: Colors.amberAccent,
+              ),
+            ),
             //following container contains the Remind me on a day function
             Container(
-              margin: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 10.0),
-              padding: EdgeInsets.only(left: 12.0),
+              margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 10.0),
+              padding: EdgeInsets.only(left: 20.0),
               alignment: Alignment.topLeft,
               child: Row(
                 children: <Widget>[
@@ -128,7 +194,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 80),
+                    padding: EdgeInsets.only(left: 60),
                     child: CupertinoSwitch(
                       value: isSwitched,
                       // inactiveThumbColor: Colors.white,
@@ -144,6 +210,12 @@ class _Add_ReminderState extends State<Add_Reminder> {
                     ),
                   ),
                 ],
+              ),
+            ),
+            SizedBox(
+              width: 300.0,
+              child: Divider(
+                color: Colors.amberAccent,
               ),
             ),
             ConditionalBuilder(
@@ -218,11 +290,17 @@ class _Add_ReminderState extends State<Add_Reminder> {
               builder: (context) {
                 return Container(
                   padding:
-                      EdgeInsets.symmetric(vertical: 5.0, horizontal: 12.0),
+                      EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
                   // margin: EdgeInsets.all(8.0),
 
                   child: Column(
                     children: <Widget>[
+                      SizedBox(
+                        width: 300.0,
+                        child: Divider(
+                          color: Colors.amberAccent,
+                        ),
+                      ),
                       Row(
                         children: <Widget>[
                           Container(
@@ -238,7 +316,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.only(left: 60),
+                            padding: EdgeInsets.only(left: 40),
                             child: CupertinoSwitch(
                               value: isTime,
                               // inactiveThumbColor: Colors.white,
@@ -254,6 +332,12 @@ class _Add_ReminderState extends State<Add_Reminder> {
                             ),
                           ),
                         ],
+                      ),
+                      SizedBox(
+                        width: 300.0,
+                        child: Divider(
+                          color: Colors.amberAccent,
+                        ),
                       ),
                     ],
                   ),
