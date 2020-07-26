@@ -16,7 +16,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
   //all variables used are defined here
   String title = '';
   String notes = '';
-  bool isSwitched = false;
+  bool isSwitched = true;
   bool isTime = false;
   DateTime _dateTime = DateTime.now();
   DateTime time = null;
@@ -26,7 +26,6 @@ class _Add_ReminderState extends State<Add_Reminder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       //AppBar
       appBar: AppBar(
@@ -35,7 +34,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
           'Add Reminder',
           style: TextStyle(
             fontSize: 25,
-            color: Colors.amber,
+            color: Colors.white,
           ),
         ),
         titleSpacing: 20,
@@ -48,28 +47,23 @@ class _Add_ReminderState extends State<Add_Reminder> {
             ),
             //First Text Field to input title
             Padding(
-              padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0.0),
+              padding: const EdgeInsets.all(12.0),
               child: Card(
-                margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
-                color: Colors.transparent,
+                margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 2.0),
+                color: Colors.white,
                 child: TextField(
-                  style: TextStyle(color: Colors.white),
                   textCapitalization: TextCapitalization.sentences,
                   autofocus: true,
-                  maxLines: 2,
-                  minLines: 1,
                   enableInteractiveSelection: true,
                   enableSuggestions: true,
                   decoration: InputDecoration(
                     prefixIcon: Icon(
                       Icons.add_box,
-                      color: Colors.amber,
-                      size: 30.0,
+                      color: Colors.blue,
                     ),
                     hintText: 'Title',
-                    hintStyle: TextStyle(color: Colors.grey),
                     border: InputBorder.none,
-                    focusColor: Colors.amber,
+                    focusColor: Colors.white,
                   ),
                   onChanged: (String str) {
                     setState(() {
@@ -81,27 +75,23 @@ class _Add_ReminderState extends State<Add_Reminder> {
             ),
             //Second text field to input notes
             Padding(
-              padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 12.0),
+              padding: const EdgeInsets.all(12.0),
               child: Card(
                 margin: EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 2.0),
-                color: Colors.transparent,
+                color: Colors.white,
                 child: TextField(
-                  style: TextStyle(color: Colors.white),
                   textCapitalization: TextCapitalization.sentences,
                   keyboardType: TextInputType.multiline,
-                  maxLines: 3,
-                  minLines: 1,
+                  maxLines: 2,
                   autofocus: true,
                   enableInteractiveSelection: true,
                   enableSuggestions: true,
                   decoration: InputDecoration(
                     prefixIcon: Icon(
                       Icons.note_add,
-                      color: Colors.amber,
-                      size: 30.0,
+                      color: Colors.blue,
                     ),
                     hintText: 'Notes',
-                    hintStyle: TextStyle(color: Colors.grey),
                     border: InputBorder.none,
                     focusColor: Colors.white,
                   ),
@@ -124,7 +114,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
                     'Remind me on a Day',
                     style: TextStyle(
                       fontSize: 20.0,
-                      color: Colors.amberAccent.shade400,
+                      color: Colors.amber,
                     ),
                   ),
                   Container(
@@ -140,81 +130,39 @@ class _Add_ReminderState extends State<Add_Reminder> {
                       },
                       // activeTrackColor: Colors.lightBlueAccent.shade200,
                       trackColor: Colors.grey.shade800,
-                      activeColor: Colors.amber.shade500,
+                      activeColor: Colors.blue.shade500,
                     ),
                   ),
                 ],
               ),
             ),
             ConditionalBuilder(
-              condition: isSwitched && isTime,
-              builder: (context) {
-                return Container(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 5.0, horizontal: 12.0),
-                  child: SizedBox(
-                    height: 170.0,
-                    width: 700.0,
-                    child: CupertinoTheme(
-                      data: CupertinoThemeData(
-                        textTheme: CupertinoTextThemeData(
-                          dateTimePickerTextStyle:
-                              TextStyle(fontSize: 16, color: Colors.white),
-                        ),
-                      ),
-                      child: CupertinoDatePicker(
-                        backgroundColor: Colors.black,
-                        initialDateTime: _dateTime,
-                        use24hFormat: true,
-                        // mode: CupertinoDatePickerMode.time,
-                        onDateTimeChanged: (dateTime) {
-                          setState(() {
-                            _dateTime = dateTime;
-                          });
-                          // print(time);
-                        },
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-            ConditionalBuilder(
-              condition: isSwitched && !isTime,
+              condition: isSwitched,
               builder: (context) {
                 return Container(
                   padding:
                       EdgeInsets.symmetric(vertical: 5.0, horizontal: 12.0),
                   // margin: EdgeInsets.all(8.0),
                   child: SizedBox(
-                    height: 170.0,
-                    width: 700.0,
-                    child: CupertinoTheme(
-                      data: CupertinoThemeData(
-                        textTheme: CupertinoTextThemeData(
-                          dateTimePickerTextStyle:
-                              TextStyle(fontSize: 16, color: Colors.white),
-                        ),
-                      ),
-                      child: CupertinoDatePicker(
-                        backgroundColor: Colors.black,
-                        initialDateTime: DateTime.now(),
-                        mode: CupertinoDatePickerMode.date,
-                        onDateTimeChanged: (dateTime) {
-                          setState(() {
-                            _dateTime = dateTime;
-                            // date = dateTime;
-                          });
-                          // print(_dateTime);
-                        },
-                      ),
+                    height: 120.0,
+                    child: CupertinoDatePicker(
+                      backgroundColor: Colors.white,
+                      initialDateTime: DateTime.now(),
+                      mode: CupertinoDatePickerMode.date,
+                      onDateTimeChanged: (dateTime) {
+                        setState(() {
+                          _dateTime = dateTime;
+                          // date = dateTime;
+                        });
+                        // print(_dateTime);
+                      },
                     ),
                   ),
                 );
               },
             ),
             ConditionalBuilder(
-              condition: isSwitched,
+              condition: date.isBefore(_dateTime) && isSwitched,
               builder: (context) {
                 return Container(
                   padding:
@@ -233,7 +181,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
                               'Remind me on a Time',
                               style: TextStyle(
                                 fontSize: 20.0,
-                                color: Colors.amberAccent.shade400,
+                                color: Colors.blue.shade300,
                               ),
                             ),
                           ),
@@ -249,11 +197,32 @@ class _Add_ReminderState extends State<Add_Reminder> {
                                 });
                               },
                               // activeTrackColor: Colors.lightBlueAccent.shade200,
-                              activeColor: Colors.amber.shade500,
+                              activeColor: Colors.blue.shade500,
                               trackColor: Colors.grey.shade800,
                             ),
                           ),
                         ],
+                      ),
+                      ConditionalBuilder(
+                        condition:
+                            date.isBefore(_dateTime) && isSwitched && isTime,
+                        builder: (context) {
+                          return SizedBox(
+                            height: 80.0,
+                            child: CupertinoDatePicker(
+                              backgroundColor: Colors.white,
+                              initialDateTime: DateTime.now(),
+                              use24hFormat: true,
+                              mode: CupertinoDatePickerMode.time,
+                              onDateTimeChanged: (dateTime) {
+                                setState(() {
+                                  time = dateTime;
+                                });
+                                // print(time);
+                              },
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
