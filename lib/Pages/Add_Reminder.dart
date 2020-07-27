@@ -1,4 +1,5 @@
 import 'dart:io';
+// import 'dart:js';
 // import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -6,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'conditional_builder.dart';
 
 // List<CameraDescription> cameras;
+
+enum repeat_list { Daily, Weekly, Monthly, Yearly }
 
 class Add_Reminder extends StatefulWidget {
   @override
@@ -21,9 +24,9 @@ class _Add_ReminderState extends State<Add_Reminder> {
   DateTime _dateTime = DateTime.now();
   DateTime time = null;
   bool email = false;
+  String repeat = 'Never';
   // DateTime now = new DateTime.now();
   DateTime date = DateTime.now().subtract(Duration(days: 1));
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -292,7 +295,6 @@ class _Add_ReminderState extends State<Add_Reminder> {
                   padding:
                       EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
                   // margin: EdgeInsets.all(8.0),
-
                   child: Column(
                     children: <Widget>[
                       SizedBox(
@@ -339,11 +341,48 @@ class _Add_ReminderState extends State<Add_Reminder> {
                           color: Colors.amberAccent,
                         ),
                       ),
+                      Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Icon(
+                              Icons.repeat,
+                              size: 30.0,
+                              color: Colors.amber,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Repeat',
+                              style: TextStyle(
+                                color: Colors.amber,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              left: 145,
+                            ),
+                            child: IconButton(
+                                icon: Icon(
+                                  Icons.arrow_drop_down,
+                                  color: Colors.white,
+                                  size: 30.0,
+                                ),
+                                onPressed: () {
+                                  print(_dateTime);
+                                }),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 );
               },
             ),
+
             // ConditionalBuilder(
             //   condition: date.isBefore(_dateTime) && isSwitched,
             //   builder: (context) {
