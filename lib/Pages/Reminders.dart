@@ -1,34 +1,31 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import '../main.dart';
 
 class Reminder {
   String msg;
   String time;
   bool enabled = true;
-  Reminder(String msg,String time){
+  Reminder(String msg, String time) {
     this.msg = msg;
     this.time = time;
   }
 }
-List<Reminder> reminders = <Reminder> [Reminder('Drink Water','10:00 AM'),
+
+List<Reminder> reminders = <Reminder>[
+  Reminder('Drink Water', '10:00 AM'),
   Reminder('Send email to 123@xyz.com', '11:00 PM'),
-  Reminder('Bring Medicines','1:00 PM'),
-  Reminder('Heyyah!', '10:00 PM')];
-
-
-
-
-
+  Reminder('Bring Medicines', '1:00 PM'),
+  Reminder('Heyyah!', '10:00 PM')
+];
 
 class Reminders extends StatefulWidget {
-
   @override
   _ReminderAppState createState() => _ReminderAppState();
 }
 
 class _ReminderAppState extends State<Reminders> {
-
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -39,17 +36,15 @@ class _ReminderAppState extends State<Reminders> {
 
   @override
   Widget build(BuildContext context) {
-
-    List<Widget> body = <Widget> [
+    List<Widget> body = <Widget>[
       ListView.builder(
         padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
         itemCount: reminders.length,
         itemBuilder: (context, index) {
           return Container(
-            decoration: BoxDecoration( //                    <-- BoxDecoration
-              border: Border(bottom: BorderSide(
-                  color: Colors.grey[800]
-              )),
+            decoration: BoxDecoration(
+              //                    <-- BoxDecoration
+              border: Border(bottom: BorderSide(color: Colors.grey[800])),
             ),
             child: Dismissible(
               direction: DismissDirection.horizontal,
@@ -65,8 +60,7 @@ class _ReminderAppState extends State<Reminders> {
                         color: Colors.red,
                       ),
                     ],
-                  )
-              ),
+                  )),
               secondaryBackground: Container(
                   color: Colors.grey[900],
                   child: Row(
@@ -79,43 +73,35 @@ class _ReminderAppState extends State<Reminders> {
                       ),
                       SizedBox(width: 20),
                     ],
-                  )
-              ),
+                  )),
               key: UniqueKey(),
               onDismissed: (direction) {
                 if (direction == DismissDirection.startToEnd) {
                   setState(() {
                     reminders.removeAt(index);
                   });
-                  Scaffold
-                      .of(context)
-                      .showSnackBar(
+                  Scaffold.of(context).showSnackBar(
                       SnackBar(content: Text("Reminder deleted")));
                 } else {
                   setState(() {
                     //reminder shifted from active to completed
-                    Scaffold
-                        .of(context)
-                        .showSnackBar(SnackBar(content: Text(
-                        "Reminder shifted to completed")));
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                        content: Text("Reminder shifted to completed")));
                   });
                 }
               },
               child: ListTile(
-                title: Text(
-                    reminders[index].msg,
+                title: Text(reminders[index].msg,
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,
-                    )
-                ),
-                subtitle: Text(
-                    "${reminders[index].time} \n${reminders[index].time}",
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.white,
-                    )
-                ),
+                    )),
+                subtitle:
+                    Text("${reminders[index].time} \n${reminders[index].time}",
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                        )),
                 //dense: true,
                 isThreeLine: true,
 
@@ -134,10 +120,9 @@ class _ReminderAppState extends State<Reminders> {
         itemCount: reminders.length,
         itemBuilder: (context, index) {
           return Container(
-            decoration: BoxDecoration( //                    <-- BoxDecoration
-              border: Border(bottom: BorderSide(
-                  color: Colors.grey[800]
-              )),
+            decoration: BoxDecoration(
+              //                    <-- BoxDecoration
+              border: Border(bottom: BorderSide(color: Colors.grey[800])),
             ),
             child: Dismissible(
               direction: DismissDirection.startToEnd,
@@ -153,34 +138,27 @@ class _ReminderAppState extends State<Reminders> {
                         color: Colors.red,
                       ),
                     ],
-                  )
-              ),
+                  )),
               key: UniqueKey(),
               onDismissed: (direction) {
-                  setState(() {
-                    reminders.removeAt(index);
-                  });
-                  Scaffold
-                      .of(context)
-                      .showSnackBar(
-                      SnackBar(content: Text("Reminder deleted")));
+                setState(() {
+                  reminders.removeAt(index);
+                });
+                Scaffold.of(context)
+                    .showSnackBar(SnackBar(content: Text("Reminder deleted")));
               },
-
               child: ListTile(
-                title: Text(
-                    reminders[index].msg,
+                title: Text(reminders[index].msg,
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,
-                    )
-                ),
-                subtitle: Text(
-                    "${reminders[index].time} \n${reminders[index].time}",
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.white,
-                    )
-                ),
+                    )),
+                subtitle:
+                    Text("${reminders[index].time} \n${reminders[index].time}",
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                        )),
                 //dense: true,
                 isThreeLine: true,
 
@@ -197,7 +175,6 @@ class _ReminderAppState extends State<Reminders> {
     ];
 
     return Scaffold(
-
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -216,13 +193,8 @@ class _ReminderAppState extends State<Reminders> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_active),
-            title: Text('')
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.done_all),
-            title: Text('')
-          )
+              icon: Icon(Icons.notifications_active), title: Text('')),
+          BottomNavigationBarItem(icon: Icon(Icons.done_all), title: Text(''))
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber,
@@ -237,16 +209,17 @@ class _ReminderAppState extends State<Reminders> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       //body:
       floatingActionButton: FloatingActionButton(
-          onPressed: (){},
-          backgroundColor: Colors.amber,
-          child: Icon(
-            Icons.add,
-            size: 33,
-            color: Colors.black87,
-          ),
-
+        onPressed: () {
+          Navigator.pushNamed(context, '/add_reminder');
+          ;
+        },
+        backgroundColor: Colors.amber,
+        child: Icon(
+          Icons.add,
+          size: 33,
+          color: Colors.black87,
         ),
+      ),
     );
-
   }
 }
