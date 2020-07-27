@@ -9,7 +9,7 @@ import '../main.dart';
 
 // List<CameraDescription> cameras;
 
-enum repeat_list { Daily, Weekly, Monthly, Yearly }
+enum repeat_list { Never, Daily, Weekly, Monthly, Yearly }
 
 class Add_Reminder extends StatefulWidget {
   @override
@@ -26,7 +26,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
   DateTime _dateTime = DateTime.now();
   DateTime time = null;
   bool email = false;
-  String repeat = '';
+  var repeat;
   // DateTime now = new DateTime.now();
   DateTime date = DateTime.now().subtract(Duration(days: 1));
   @override
@@ -45,15 +45,30 @@ class _Add_ReminderState extends State<Add_Reminder> {
           ),
         ),
         titleSpacing: 20,
+        actions: <Widget>[
+          IconButton(
+              padding: EdgeInsets.fromLTRB(0.0, 4.0, 18.0, 0.0),
+              icon: Icon(
+                Icons.add_alarm,
+                size: 30.0,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                print(title);
+                print(notes);
+                print(email);
+                print(isSwitched);
+                print(_dateTime);
+                print(isTime);
+                print(repeat);
+              })
+        ],
       ),
       body: ListView(
         children: [
           Container(
             child: Column(
               children: <Widget>[
-                SizedBox(
-                  height: 20.0,
-                ),
                 //First Text Field to input title
                 Padding(
                   padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0.0),
@@ -370,15 +385,56 @@ class _Add_ReminderState extends State<Add_Reminder> {
                                 padding: EdgeInsets.only(
                                   left: 145,
                                 ),
-                                child: IconButton(
-                                    icon: Icon(
-                                      Icons.arrow_drop_down,
-                                      color: Colors.white,
-                                      size: 30.0,
+                                child: PopupMenuButton<repeat_list>(
+                                  icon: Icon(
+                                    Icons.arrow_drop_down,
+                                    color: Colors.white,
+                                  ),
+                                  color: Colors.grey.shade800,
+                                  onSelected: (repeat_list result) {
+                                    setState(() {
+                                      repeat = result;
+                                    });
+                                  },
+                                  itemBuilder: (BuildContext context) =>
+                                      <PopupMenuEntry<repeat_list>>[
+                                    const PopupMenuItem<repeat_list>(
+                                      value: repeat_list.Never,
+                                      child: Text(
+                                        'Never',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
                                     ),
-                                    onPressed: () {
-                                      print(_dateTime);
-                                    }),
+                                    const PopupMenuItem<repeat_list>(
+                                      value: repeat_list.Daily,
+                                      child: Text(
+                                        'Daily',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                    const PopupMenuItem<repeat_list>(
+                                      value: repeat_list.Weekly,
+                                      child: Text(
+                                        'Weekly',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                    const PopupMenuItem<repeat_list>(
+                                      value: repeat_list.Monthly,
+                                      child: Text(
+                                        'Monthly',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                    const PopupMenuItem(
+                                      value: repeat_list.Yearly,
+                                      child: Text(
+                                        'Yearly',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
