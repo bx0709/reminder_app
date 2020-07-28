@@ -207,11 +207,10 @@ class _ReminderAppState extends State<Reminders> {
       ),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      //body:
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, '/add_reminder');
-          ;
         },
         backgroundColor: Colors.amber,
         child: Icon(

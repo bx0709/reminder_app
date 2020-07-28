@@ -1,13 +1,12 @@
 import 'dart:io';
 // import 'dart:js';
-// import 'package:camera/camera.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import '../Functionality/conditional_builder.dart';
 import '../main.dart';
 
-// List<CameraDescription> cameras;
 
 enum repeat_list { Never, Daily, Weekly, Monthly, Yearly }
 
@@ -68,6 +67,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
         children: [
           Container(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 //First Text Field to input title
                 Padding(
@@ -149,12 +149,14 @@ class _Add_ReminderState extends State<Add_Reminder> {
                   ),
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Container(
                       margin: EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 0.0),
                       padding: EdgeInsets.only(left: 12.0),
                       alignment: Alignment.topLeft,
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.only(left: 10.0),
@@ -207,6 +209,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
                   padding: EdgeInsets.only(left: 20.0),
                   alignment: Alignment.topLeft,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
                         'Remind me on a Day',
@@ -323,6 +326,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
                             ),
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Container(
                                 margin:
@@ -362,6 +366,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
                             ),
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
