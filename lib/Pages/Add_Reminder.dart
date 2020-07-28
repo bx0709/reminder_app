@@ -103,9 +103,9 @@ class _Add_ReminderState extends State<Add_Reminder> {
                   ),
                 ),
                 SizedBox(
-                  width: 300.0,
+                  width: 370.0,
                   child: Divider(
-                    color: Colors.amberAccent,
+                    color: Colors.grey[500],
                   ),
                 ),
                 //Second text field to input notes
@@ -143,9 +143,9 @@ class _Add_ReminderState extends State<Add_Reminder> {
                   ),
                 ),
                 SizedBox(
-                  width: 300.0,
+                  width: 370.0,
                   child: Divider(
-                    color: Colors.amberAccent,
+                    color: Colors.grey[500],
                   ),
                 ),
                 Row(
@@ -174,7 +174,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(left: 160),
+                            margin: EdgeInsets.only(left: 230),
                             color: Colors.transparent,
                             child: Theme(
                               data: Theme.of(context).copyWith(
@@ -198,9 +198,9 @@ class _Add_ReminderState extends State<Add_Reminder> {
                   ],
                 ),
                 SizedBox(
-                  width: 300.0,
+                  width: 370.0,
                   child: Divider(
-                    color: Colors.amberAccent,
+                    color: Colors.grey[500],
                   ),
                 ),
                 //following container contains the Remind me on a day function
@@ -238,9 +238,9 @@ class _Add_ReminderState extends State<Add_Reminder> {
                   ),
                 ),
                 SizedBox(
-                  width: 300.0,
+                  width: 370.0,
                   child: Divider(
-                    color: Colors.amberAccent,
+                    color: Colors.grey[500],
                   ),
                 ),
                 ConditionalBuilder(
@@ -320,9 +320,9 @@ class _Add_ReminderState extends State<Add_Reminder> {
                       child: Column(
                         children: <Widget>[
                           SizedBox(
-                            width: 300.0,
+                            width: 370.0,
                             child: Divider(
-                              color: Colors.amberAccent,
+                              color: Colors.grey[500],
                             ),
                           ),
                           Row(
@@ -360,9 +360,9 @@ class _Add_ReminderState extends State<Add_Reminder> {
                             ],
                           ),
                           SizedBox(
-                            width: 300.0,
+                            width: 370.0,
                             child: Divider(
-                              color: Colors.amberAccent,
+                              color: Colors.grey[500],
                             ),
                           ),
                           Row(
