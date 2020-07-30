@@ -67,38 +67,43 @@ class _Add_ReminderState extends State<Add_Reminder> {
       body: ListView(
         children: [
           Container(
+            alignment: Alignment.center,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 //First Text Field to input title
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0.0),
-                  child: Card(
-                    margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
-                    color: Colors.transparent,
-                    child: TextField(
-                      style: TextStyle(color: Colors.white),
-                      textCapitalization: TextCapitalization.sentences,
-                      autofocus: true,
-                      maxLines: 2,
-                      minLines: 1,
-                      enableInteractiveSelection: true,
-                      enableSuggestions: true,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(
-                          Icons.add_box,
-                          color: Colors.amber,
-                          size: 30.0,
+                Container(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 0.0),
+                    child: Card(
+                      margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
+                      color: Colors.transparent,
+                      child: TextField(
+                        style: TextStyle(color: Colors.white),
+                        textCapitalization: TextCapitalization.sentences,
+                        autofocus: true,
+                        maxLines: 2,
+                        minLines: 1,
+                        enableInteractiveSelection: true,
+                        enableSuggestions: true,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.add_box,
+                            color: Colors.amber,
+                            size: 30.0,
+                          ),
+                          hintText: 'Title',
+                          hintStyle: TextStyle(color: Colors.grey),
+                          border: InputBorder.none,
+                          focusColor: Colors.amber,
                         ),
-                        hintText: 'Title',
-                        hintStyle: TextStyle(color: Colors.grey),
-                        border: InputBorder.none,
-                        focusColor: Colors.amber,
+                        onChanged: (String str) {
+                          setState(() {
+                            title = str;
+                          });
+                        },
                       ),
-                      onChanged: (String str) {
-                        setState(() {
-                          title = str;
-                        });
-                      },
                     ),
                   ),
                 ),
@@ -109,36 +114,39 @@ class _Add_ReminderState extends State<Add_Reminder> {
                   ),
                 ),
                 //Second text field to input notes
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(12.0, 4.0, 12.0, 4.0),
-                  child: Card(
-                    margin: EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 2.0),
-                    color: Colors.transparent,
-                    child: TextField(
-                      style: TextStyle(color: Colors.white),
-                      textCapitalization: TextCapitalization.sentences,
-                      keyboardType: TextInputType.multiline,
-                      maxLines: 3,
-                      minLines: 1,
-                      autofocus: true,
-                      enableInteractiveSelection: true,
-                      enableSuggestions: true,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(
-                          Icons.note_add,
-                          color: Colors.amber,
-                          size: 30.0,
+                Container(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(12.0, 4.0, 12.0, 4.0),
+                    child: Card(
+                      margin: EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 2.0),
+                      color: Colors.transparent,
+                      child: TextField(
+                        style: TextStyle(color: Colors.white),
+                        textCapitalization: TextCapitalization.sentences,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: 3,
+                        minLines: 1,
+                        autofocus: true,
+                        enableInteractiveSelection: true,
+                        enableSuggestions: true,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.note_add,
+                            color: Colors.amber,
+                            size: 30.0,
+                          ),
+                          hintText: 'Notes',
+                          hintStyle: TextStyle(color: Colors.grey),
+                          border: InputBorder.none,
+                          focusColor: Colors.white,
                         ),
-                        hintText: 'Notes',
-                        hintStyle: TextStyle(color: Colors.grey),
-                        border: InputBorder.none,
-                        focusColor: Colors.white,
+                        onChanged: (String str) {
+                          setState(() {
+                            notes = str;
+                          });
+                        },
                       ),
-                      onChanged: (String str) {
-                        setState(() {
-                          notes = str;
-                        });
-                      },
                     ),
                   ),
                 ),
@@ -149,11 +157,12 @@ class _Add_ReminderState extends State<Add_Reminder> {
                   ),
                 ),
                 Row(
+                  // mainAxisAlignment: Alignment.center,
                   children: <Widget>[
                     Container(
                       margin: EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 0.0),
                       padding: EdgeInsets.only(left: 12.0),
-                      alignment: Alignment.topLeft,
+                      alignment: Alignment.center,
                       child: Row(
                         children: <Widget>[
                           Padding(
@@ -172,7 +181,9 @@ class _Add_ReminderState extends State<Add_Reminder> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(left: 160),
+                            // margin: EdgeInsets.only(left: 160),
+                            padding: EdgeInsets.only(left: 160),
+                            alignment: Alignment.centerRight,
                             color: Colors.transparent,
                             child: Theme(
                               data: Theme.of(context).copyWith(
@@ -203,9 +214,9 @@ class _Add_ReminderState extends State<Add_Reminder> {
                 ),
                 //following container contains the Remind me on a day function
                 Container(
-                  margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 10.0),
+                  margin: EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
                   padding: EdgeInsets.only(left: 20.0),
-                  alignment: Alignment.topLeft,
+                  alignment: Alignment.center,
                   child: Row(
                     children: <Widget>[
                       Text(
@@ -244,6 +255,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
                   condition: isSwitched && isTime,
                   builder: (context) {
                     return Container(
+                      alignment: Alignment.center,
                       padding:
                           EdgeInsets.symmetric(vertical: 5.0, horizontal: 12.0),
                       child: SizedBox(
@@ -277,6 +289,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
                   condition: isSwitched && !isTime,
                   builder: (context) {
                     return Container(
+                      alignment: Alignment.center,
                       padding:
                           EdgeInsets.symmetric(vertical: 5.0, horizontal: 12.0),
                       // margin: EdgeInsets.all(8.0),
@@ -311,6 +324,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
                   condition: isSwitched,
                   builder: (context) {
                     return Container(
+                      alignment: Alignment.center,
                       padding:
                           EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
                       // margin: EdgeInsets.all(8.0),
@@ -326,9 +340,9 @@ class _Add_ReminderState extends State<Add_Reminder> {
                             children: <Widget>[
                               Container(
                                 margin:
-                                    EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 10.0),
+                                    EdgeInsets.fromLTRB(8.0, 10.0, 8.0, 10.0),
                                 // padding: EdgeInsets.only(left: 12.0),
-                                alignment: Alignment.topLeft,
+                                alignment: Alignment.center,
                                 child: Text(
                                   'Remind me on a Time',
                                   style: TextStyle(
@@ -339,6 +353,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
                               ),
                               Container(
                                 padding: EdgeInsets.only(left: 40),
+                                alignment: Alignment.centerRight,
                                 child: CupertinoSwitch(
                                   value: isTime,
                                   // inactiveThumbColor: Colors.white,
@@ -362,6 +377,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
                             ),
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Padding(
                                 padding: const EdgeInsets.only(left: 8.0),
