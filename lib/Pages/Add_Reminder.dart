@@ -1,11 +1,7 @@
-import 'dart:io';
-// import 'dart:js';
-// import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import '../Functionality/conditional_builder.dart';
-import '../main.dart';
 
 // List<CameraDescription> cameras;
 

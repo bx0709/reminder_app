@@ -10,6 +10,7 @@ void main() {
     routes: {
       '/': (context) => Reminders(),
       '/add_reminder': (context) => Add_Reminder(),
+
     },
   ));
 }

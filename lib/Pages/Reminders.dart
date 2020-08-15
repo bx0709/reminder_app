@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../main.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:reminder_app/Functionality/auth.dart';
 
 class Reminder {
   String msg;
@@ -208,11 +207,18 @@ class _ReminderAppState extends State<Reminders> {
       ),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      //body:
+
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/add_reminder');
-          ;
+        onPressed: () async{
+          //Navigator.pushNamed(context, '/add_reminder');
+          AuthService _auth = AuthService();
+          dynamic result = await _auth.signInAnon();
+          if(result != null){
+            print('Signed in');
+            print(result);
+          }else{
+            print('Error');
+          }
         },
         backgroundColor: Colors.amber,
         child: Icon(
