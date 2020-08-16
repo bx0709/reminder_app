@@ -3,8 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import '../Functionality/conditional_builder.dart';
 
-// List<CameraDescription> cameras;
-
 enum repeat_list { Never, Daily, Weekly, Monthly, Yearly }
 
 class Add_Reminder extends StatefulWidget {

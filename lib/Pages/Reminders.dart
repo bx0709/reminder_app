@@ -210,15 +210,7 @@ class _ReminderAppState extends State<Reminders> {
 
       floatingActionButton: FloatingActionButton(
         onPressed: () async{
-          //Navigator.pushNamed(context, '/add_reminder');
-          AuthService _auth = AuthService();
-          dynamic result = await _auth.signInAnon();
-          if(result != null){
-            print('Signed in');
-            print(result);
-          }else{
-            print('Error');
-          }
+          Navigator.pushNamed(context, '/add_reminder');
         },
         backgroundColor: Colors.amber,
         child: Icon(
