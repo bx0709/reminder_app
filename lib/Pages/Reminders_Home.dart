@@ -34,6 +34,8 @@ class _ReminderAppState extends State<Reminders> {
     });
   }
 
+  final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     List<Widget> body = <Widget>[
@@ -178,6 +180,22 @@ class _ReminderAppState extends State<Reminders> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
+          actions: <Widget>[
+      FlatButton.icon(
+        icon: Icon(
+          Icons.person,
+          color: Colors.amber,
+        ),
+        label: Text(
+          'Logout',
+          style: TextStyle(
+            color: Colors.amber
+          ),
+        ),
+        onPressed: () async{
+          await _auth.signOut();
+        })
+    ],
         title: Text(
           'Reminders',
           style: TextStyle(
@@ -209,7 +227,7 @@ class _ReminderAppState extends State<Reminders> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async{
           Navigator.pushNamed(context, '/add_reminder');
         },
         backgroundColor: Colors.amber,

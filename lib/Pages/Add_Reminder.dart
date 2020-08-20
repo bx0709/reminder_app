@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:reminder_app/Functionality/Database.dart';
+import 'package:reminder_app/Functionality/auth.dart';
+import 'package:reminder_app/Models/user.dart';
+import 'package:reminder_app/Pages/Wrapper.dart';
+import 'package:reminder_app/Shared/Loading.dart';
 import '../Functionality/conditional_builder.dart';
 
 enum repeat_list { Never, Daily, Weekly, Monthly, Yearly }
@@ -23,6 +28,10 @@ class _Add_ReminderState extends State<Add_Reminder> {
   var repeat;
   // DateTime now = new DateTime.now();
   DateTime date = DateTime.now().subtract(Duration(days: 1));
+
+  final AuthService _auth = AuthService();
+  bool loading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,18 +56,20 @@ class _Add_ReminderState extends State<Add_Reminder> {
                 size: 30.0,
                 color: Colors.white,
               ),
-              onPressed: () {
-                print(title);
-                print(notes);
-                print(email);
-                print(isSwitched);
-                print(_dateTime);
-                print(isTime);
-                print(repeat);
+              onPressed: () async{
+                setState(() {
+                  loading = true;
+                });
+                final user = await _auth.currentUser();
+                await DatabaseService(uid: user.uid).addData(title: title, notes: notes, dateTime: time, allDay: isTime, email: email);
+                setState(() {
+                  loading = false;
+                });
+                Navigator.pop(context);
               })
         ],
       ),
-      body: ListView(
+      body: loading ? Loading():ListView(
         children: [
           Container(
             alignment: Alignment.center,
