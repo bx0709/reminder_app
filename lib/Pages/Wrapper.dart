@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reminder_app/Models/user.dart';
 import 'package:reminder_app/Pages/Authentication.dart';
-import 'package:reminder_app/Pages/Reminders_Home.dart';
+import 'file:///C:/Users/daksh/Desktop/Work/Android_studio/reminder_app/lib/Pages/Home/Reminders_Home.dart';
 
 class Wrapper extends StatefulWidget {
   @override
@@ -19,6 +19,6 @@ class _WrapperState extends State<Wrapper> {
     if(user == null)
       return Authentication();
     else
-      return Reminders();
+      return reminders_Home();
   }
 }

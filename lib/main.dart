@@ -4,14 +4,13 @@ import 'package:provider/provider.dart';
 import 'package:reminder_app/Functionality/auth.dart';
 import 'package:reminder_app/Models/user.dart';
 import 'package:reminder_app/Pages/Wrapper.dart';
-import 'Pages/Reminders_Home.dart';
+import 'Pages/Home/Reminders_Home.dart';
 import 'Pages/Add_Reminder.dart';
 import 'Models/user.dart';
 
 void main() => runApp(Home());
 
 class Home extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return StreamProvider<User>.value(
@@ -19,7 +18,7 @@ class Home extends StatelessWidget {
       child: MaterialApp(
         routes: {
           '/': (context) => Wrapper(),
-          '/reminders': (context) => Reminders(),
+          '/reminders_home': (context) => reminders_Home(),
           '/add_reminder': (context) => Add_Reminder(),
         },
       ),
