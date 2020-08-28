@@ -5,23 +5,6 @@ import 'package:reminder_app/Functionality/auth.dart';
 import 'package:reminder_app/Models/Reminders.dart';
 import 'package:intl/intl.dart';
 
-/*class Reminder {
-  String msg;
-  String time;
-  bool enabled = true;
-  Reminder(String msg, String time) {
-    this.msg = msg;
-    this.time = time;
-  }
-}
-
-List<Reminder> reminders = <Reminder>[
-  Reminder('Drink Water', '10:00 AM'),
-  Reminder('Send email to 123@xyz.com', '11:00 PM'),
-  Reminder('Bring Medicines', '1:00 PM'),
-  Reminder('Heyyah!', '10:00 PM')
-];*/
-
 class CompletedReminders extends StatefulWidget {
   @override
   _CompletedRemindersState createState() => _CompletedRemindersState();
@@ -63,7 +46,7 @@ class _CompletedRemindersState extends State<CompletedReminders> {
                 Scaffold.of(context).showSnackBar(
                     SnackBar(content: Text("Reminder deleted")));
                 final user = await _auth.currentUser();
-                DatabaseService(uid: user.uid).deleteData(Reminders[index]);
+                DatabaseService().deleteData(Reminders[index]);
               });
               Scaffold.of(context)
                   .showSnackBar(SnackBar(content: Text("Reminder deleted")));

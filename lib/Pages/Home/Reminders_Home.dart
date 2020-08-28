@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -23,10 +24,10 @@ class _ReminderAppState extends State<reminders_Home> {
     });
   }
 
-  final AuthService _auth = AuthService();
-
   @override
   Widget build(BuildContext context) {
+
+    final AuthService _auth = AuthService();
 
     return StreamProvider<List<Reminder>>.value(
       value: DatabaseService().reminders,
@@ -62,6 +63,7 @@ class _ReminderAppState extends State<reminders_Home> {
 
         //body: _selectedIndex == 0 ? ActiveReminders(): CompletedReminders(),
         body: ActiveReminders(),
+
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:reminder_app/Functionality/auth.dart';
 import 'package:reminder_app/Models/user.dart';
 import 'package:reminder_app/Pages/Authentication.dart';
-import 'file:///C:/Users/daksh/Desktop/Work/Android_studio/reminder_app/lib/Pages/Home/Reminders_Home.dart';
+import 'package:reminder_app/Pages/Home/Reminders_Home.dart';
+import 'package:reminder_app/Functionality/Database.dart';
 
 class Wrapper extends StatefulWidget {
   @override
@@ -16,9 +18,12 @@ class _WrapperState extends State<Wrapper> {
     final user = Provider.of<User>(context);
     print(user);
 
+    //DatabaseService(uid: user.uid);
+
     if(user == null)
       return Authentication();
-    else
+    else {
       return reminders_Home();
+    }
   }
 }

@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:reminder_app/Functionality/Database.dart';
 import 'package:reminder_app/Functionality/auth.dart';
 import 'package:reminder_app/Models/user.dart';
-import 'package:reminder_app/Pages/Wrapper.dart';
 import 'package:reminder_app/Shared/Loading.dart';
 import '../Functionality/conditional_builder.dart';
 
@@ -61,7 +60,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
                   loading = true;
                 });
                 final user = await _auth.currentUser();
-                await DatabaseService(uid: user.uid).addData(title: title, notes: notes, dateTime: time, allDay: isTime, email: email);
+                await DatabaseService().addData(title: title, notes: notes, dateTime: _dateTime, allDay: isTime, email: email);
                 setState(() {
                   loading = false;
                 });
