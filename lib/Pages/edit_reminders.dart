@@ -16,8 +16,8 @@ class Edit_Reminder extends StatefulWidget {
 
 class _Edit_ReminderState extends State<Edit_Reminder> {
   //all variables used are defined here
-  String title = '';
-  String notes = '';
+  String title = 'Title Default Fetched by Firebase';
+  String notes = 'Notes Default Fetched by Firebase';
   bool repeat_on = false;
   bool isSwitched = false;
   bool isTime = false;
@@ -56,6 +56,7 @@ class _Edit_ReminderState extends State<Edit_Reminder> {
                 color: Colors.white,
               ),
               onPressed: () async {
+                print(title + " " + notes);
                 setState(() {
                   loading = true;
                 });
@@ -91,7 +92,8 @@ class _Edit_ReminderState extends State<Edit_Reminder> {
                           child: Card(
                             margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
                             color: Colors.transparent,
-                            child: TextField(
+                            child: TextFormField(
+                              initialValue: title,
                               style: TextStyle(color: Colors.white),
                               textCapitalization: TextCapitalization.sentences,
                               autofocus: true,
@@ -134,7 +136,8 @@ class _Edit_ReminderState extends State<Edit_Reminder> {
                           child: Card(
                             margin: EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 2.0),
                             color: Colors.transparent,
-                            child: TextField(
+                            child: TextFormField(
+                              initialValue: notes,
                               style: TextStyle(color: Colors.white),
                               textCapitalization: TextCapitalization.sentences,
                               keyboardType: TextInputType.multiline,
