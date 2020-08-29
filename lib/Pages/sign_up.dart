@@ -42,6 +42,20 @@ class _Sign_UpState extends State<Sign_Up> {
                 SizedBox(
                   height: 50,
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 25.0),
+                  child: Text(
+                    "Enter the following credentials to make your new account",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 13,
+                ),
                 Container(
                   alignment: Alignment.center,
                   child: Padding(

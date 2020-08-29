@@ -23,7 +23,7 @@ class _WrapperState extends State<Wrapper> {
     //DatabaseService(uid: user.uid);
 
     if (user == null)
-      return Edit_Reminder();
+      return login_page();
     else {
       return reminders_Home();
     }

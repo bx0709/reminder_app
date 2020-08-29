@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,6 +8,8 @@ import '../Functionality/conditional_builder.dart';
 import 'package:reminder_app/Functionality/auth.dart';
 import 'package:reminder_app/Shared/Loading.dart';
 import 'sign_up.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:http/http.dart' as http;
 
 class login_page extends StatefulWidget {
   @override
@@ -21,6 +24,20 @@ class _login_pageState extends State<login_page> {
   bool loading = false;
   Future navigateToSubPage(context) async {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Sign_Up()));
+  }
+
+  void _signInFacebook() async {
+    FacebookLogin facebookLogin = FacebookLogin();
+
+    final result = await facebookLogin.logIn(['email', 'public_profile']);
+    final token = result.accessToken.token;
+    final graphResponse = await http.get(
+        'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name&access_token=${token}');
+    print(graphResponse.body);
+    if (result.status == FacebookLoginStatus.loggedIn) {
+      final credential = FacebookAuthProvider.getCredential(accessToken: token);
+      FirebaseAuth.instance.signInWithCredential(credential);
+    }
   }
 
   @override
@@ -182,7 +199,9 @@ class _login_pageState extends State<login_page> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         FloatingActionButton(
-                          onPressed: null,
+                          onPressed: () {
+                            _signInFacebook();
+                          },
                           backgroundColor: Hexcolor("#4267B2"),
                           child: Icon(
                             SocIcons.facebook,
