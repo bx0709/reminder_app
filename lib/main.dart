@@ -7,6 +7,8 @@ import 'package:reminder_app/Pages/Wrapper.dart';
 import 'Pages/Home/Reminders_Home.dart';
 import 'Pages/Add_Reminder.dart';
 import 'Models/user.dart';
+import 'Pages/Wrapper.dart';
+import 'Pages/login.dart';
 
 void main() => runApp(Home());
 

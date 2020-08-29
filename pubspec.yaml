@@ -34,6 +34,7 @@ dependencies:
   provider: ^4.3.2
   flutter_spinkit: "^4.1.2"
   intl: ^0.16.1
+  hexcolor: ^1.0.4
 
 
 dev_dependencies:
@@ -54,8 +55,18 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/bg_1.jpg
+    - images/google.png
     # - images/a_dot_ham.jpeg
-
+  fonts:
+    - family: Bebas Neue
+      fonts:
+        - asset: fonts/BebasNeue-Regular.ttf
+    - family: Dancing Script
+      fonts:
+        - asset: fonts/DancingScript.ttf
+    - family:  SocIcons
+      fonts:
+        - asset: fonts/SocIcons.ttf
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

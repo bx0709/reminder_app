@@ -9,7 +9,6 @@ import 'package:reminder_app/Models/Reminders.dart';
 import 'package:reminder_app/Pages/Home/Active_Reminders.dart';
 import 'package:reminder_app/Pages/Home/Completed_Reminders.dart';
 
-
 class reminders_Home extends StatefulWidget {
   @override
   _ReminderAppState createState() => _ReminderAppState();
@@ -26,7 +25,6 @@ class _ReminderAppState extends State<reminders_Home> {
 
   @override
   Widget build(BuildContext context) {
-
     final AuthService _auth = AuthService();
 
     return StreamProvider<List<Reminder>>.value(
@@ -35,26 +33,25 @@ class _ReminderAppState extends State<reminders_Home> {
         backgroundColor: Colors.black,
         appBar: AppBar(
           backgroundColor: Colors.black,
-            actions: <Widget>[
-        FlatButton.icon(
-          icon: Icon(
-            Icons.person,
-            color: Colors.amber,
-          ),
-          label: Text(
-            'Logout',
-            style: TextStyle(
-              color: Colors.amber
-            ),
-          ),
-          onPressed: () async{
-            await _auth.signOut();
-          })
-      ],
+          actions: <Widget>[
+            FlatButton.icon(
+                icon: Icon(
+                  Icons.person,
+                  color: Colors.amber,
+                ),
+                label: Text(
+                  'Logout',
+                  style: TextStyle(color: Colors.amber),
+                ),
+                onPressed: () async {
+                  await _auth.signOut();
+                })
+          ],
           title: Text(
             'Reminders',
             style: TextStyle(
               fontSize: 25,
+              fontFamily: 'Dancing Script',
               color: Colors.amber,
             ),
           ),
@@ -83,7 +80,7 @@ class _ReminderAppState extends State<reminders_Home> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
         floatingActionButton: FloatingActionButton(
-          onPressed: () async{
+          onPressed: () async {
             Navigator.pushNamed(context, '/add_reminder');
           },
           backgroundColor: Colors.amber,
