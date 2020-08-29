@@ -9,6 +9,7 @@ import 'Pages/Add_Reminder.dart';
 import 'Models/user.dart';
 import 'Pages/Wrapper.dart';
 import 'Pages/login.dart';
+import 'Pages/sign_up.dart';
 
 void main() => runApp(Home());
 
@@ -20,6 +21,7 @@ class Home extends StatelessWidget {
       child: MaterialApp(
         routes: {
           '/': (context) => Wrapper(),
+          '/sign_up': (context) => Sign_Up(),
           '/reminders_home': (context) => reminders_Home(),
           '/add_reminder': (context) => Add_Reminder(),
         },

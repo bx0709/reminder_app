@@ -6,6 +6,7 @@ import 'package:reminder_app/soc_icons_icons.dart';
 import '../Functionality/conditional_builder.dart';
 import 'package:reminder_app/Functionality/auth.dart';
 import 'package:reminder_app/Shared/Loading.dart';
+import 'sign_up.dart';
 
 class login_page extends StatefulWidget {
   @override
@@ -18,6 +19,10 @@ class _login_pageState extends State<login_page> {
   bool emailValid;
   final AuthService _auth = AuthService();
   bool loading = false;
+  Future navigateToSubPage(context) async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Sign_Up()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return loading
@@ -153,7 +158,9 @@ class _login_pageState extends State<login_page> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(28.0),
                                   side: BorderSide(color: Colors.amber)),
-                              onPressed: () {},
+                              onPressed: () {
+                                navigateToSubPage(context);
+                              },
                               textColor: Colors.white,
                               child: Text(
                                 'Sign up',
