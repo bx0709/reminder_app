@@ -7,6 +7,7 @@ import 'package:reminder_app/Pages/Home/Reminders_Home.dart';
 import 'package:reminder_app/Functionality/Database.dart';
 import 'sign_up.dart';
 import 'login.dart';
+import 'edit_reminders.dart';
 
 class Wrapper extends StatefulWidget {
   @override
@@ -22,7 +23,7 @@ class _WrapperState extends State<Wrapper> {
     //DatabaseService(uid: user.uid);
 
     if (user == null)
-      return login_page();
+      return Edit_Reminder();
     else {
       return reminders_Home();
     }
