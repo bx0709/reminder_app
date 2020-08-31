@@ -10,6 +10,7 @@ import 'package:reminder_app/Shared/Loading.dart';
 import 'sign_up.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
+import 'package:google_sign_in/google_sign_in.dart';
 
 class login_page extends StatefulWidget {
   @override
@@ -38,6 +39,15 @@ class _login_pageState extends State<login_page> {
       final credential = FacebookAuthProvider.getCredential(accessToken: token);
       FirebaseAuth.instance.signInWithCredential(credential);
     }
+  }
+
+  final _googleSignIn = GoogleSignIn();
+  void _loginWithGoogle() async {
+    final googleAccount = await _googleSignIn.signIn();
+    final googleAuth = await googleAccount.authentication;
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+        accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
+    await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
   @override
@@ -199,6 +209,14 @@ class _login_pageState extends State<login_page> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         FloatingActionButton(
+                            onPressed: () {
+                              _loginWithGoogle();
+                            },
+                            child: Image.asset('images/google.png')),
+                        SizedBox(
+                          width: 18,
+                        ),
+                        FloatingActionButton(
                           onPressed: () {
                             _signInFacebook();
                           },
@@ -211,16 +229,12 @@ class _login_pageState extends State<login_page> {
                           width: 18,
                         ),
                         FloatingActionButton(
-                            onPressed: null,
-                            child: Image.asset('images/google.png')),
-                        SizedBox(
-                          width: 18,
-                        ),
-                        FloatingActionButton(
                           onPressed: null,
-                          backgroundColor: Hexcolor("#55ACEE"),
+                          backgroundColor: Colors.white,
                           child: Icon(
-                            SocIcons.twitter,
+                            SocIcons.apple,
+                            color: Colors.black,
+                            size: 25,
                           ),
                         ),
                       ],
