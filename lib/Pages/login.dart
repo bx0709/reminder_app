@@ -225,18 +225,18 @@ class _login_pageState extends State<login_page> {
                             SocIcons.facebook,
                           ),
                         ),
-                        SizedBox(
-                          width: 18,
-                        ),
-                        FloatingActionButton(
-                          onPressed: null,
-                          backgroundColor: Colors.white,
-                          child: Icon(
-                            SocIcons.apple,
-                            color: Colors.black,
-                            size: 25,
-                          ),
-                        ),
+                        // SizedBox(
+                        //   width: 18,
+                        // ),
+                        // FloatingActionButton(
+                        //   onPressed: null,
+                        //   backgroundColor: Colors.white,
+                        //   child: Icon(
+                        //     SocIcons.apple,
+                        //     color: Colors.black,
+                        //     size: 25,
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
