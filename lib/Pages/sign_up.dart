@@ -6,6 +6,9 @@ import 'package:reminder_app/soc_icons_icons.dart';
 import '../Functionality/conditional_builder.dart';
 import 'package:reminder_app/Functionality/auth.dart';
 import 'package:reminder_app/Shared/Loading.dart';
+import 'Authentication.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:reminder_app/Functionality/auth.dart';
 
 class Sign_Up extends StatefulWidget {
   @override
@@ -17,6 +20,7 @@ class _Sign_UpState extends State<Sign_Up> {
   String password;
   bool emailValid;
   String Confirm_password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -223,8 +227,9 @@ class _Sign_UpState extends State<Sign_Up> {
                           borderRadius: BorderRadius.circular(28.0),
                           side: BorderSide(color: Colors.amber)),
                       onPressed: () {
+                        FirebaseAuth.instance.createUserWithEmailAndPassword(
+                            email: email, password: password);
                         print('Sign up');
-                        Navigator.pushNamed(context, '/reminders_home');
                       },
                       textColor: Colors.white,
                       child: Text(

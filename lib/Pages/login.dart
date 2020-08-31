@@ -164,7 +164,11 @@ class _login_pageState extends State<login_page> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(28.0),
                                   side: BorderSide(color: Colors.amber)),
-                              onPressed: () {},
+                              onPressed: () {
+                                FirebaseAuth.instance
+                                    .signInWithEmailAndPassword(
+                                        email: email, password: password);
+                              },
                               textColor: Colors.white,
                               child: Text(
                                 'Login',
@@ -242,6 +246,25 @@ class _login_pageState extends State<login_page> {
                   ),
                   SizedBox(
                     height: 15,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    child: FlatButton(
+                      color: Colors.black,
+                      onPressed: () {
+                        FirebaseAuth.instance
+                            .sendPasswordResetEmail(email: email);
+                      },
+                      child: Text(
+                        'Forgot Password?',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline,
+                          color: Colors.amber,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
                   ),
                   Container(
                     alignment: Alignment.center,
