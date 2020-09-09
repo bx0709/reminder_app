@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'file:///C:/Users/daksh/Desktop/Work/Android_studio/reminder_app/lib/Shared/soc_icons_icons.dart';
+import 'package:reminder_app/Shared/soc_icons_icons.dart';
 import '../Functionality/conditional_builder.dart';
 import 'package:reminder_app/Functionality/auth.dart';
 import 'package:reminder_app/Shared/Loading.dart';
