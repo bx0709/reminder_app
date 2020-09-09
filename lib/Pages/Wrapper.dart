@@ -20,11 +20,11 @@ class _WrapperState extends State<Wrapper> {
     final user = Provider.of<User>(context);
     print(user);
 
-    //DatabaseService(uid: user.uid);
-
     if (user == null)
       return login_page();
     else {
+      DatabaseService databaseService = new DatabaseService();
+      databaseService.setupDatabase(user.uid);
       return reminders_Home();
     }
   }

@@ -1,13 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:reminder_app/Models/Reminders.dart';
+import 'package:reminder_app/Functionality/auth.dart';
+import 'package:reminder_app/Models/user.dart';
 
 class DatabaseService {
+  static String uid;
+  static CollectionReference userCollection;
 
-  final String uid = '123456';
-  CollectionReference userCollection;
+  /*DatabaseService.setupDatabase({this.uid}){
+    userCollection = Firestore.instance.collection('UserID : ' + uid);
+  }*/
 
-  DatabaseService(){
-   userCollection = Firestore.instance.collection('UserID : ' + uid);
+  void setupDatabase(String string){
+    uid = string;
+    userCollection = Firestore.instance.collection('UserID : ' + uid);
   }
 
   // Adding new data
@@ -21,8 +27,10 @@ class DatabaseService {
       'reminderUid': userCollection.document().documentID,
     });
   }
+
   // Deleting data
   void deleteData(Reminder r) async {
+    print("--------------------"+r.reminderUid);
     await userCollection.document(r.reminderUid).delete();
   }
 
@@ -45,8 +53,9 @@ class DatabaseService {
     }).toList();
   }
 
+
   Stream<List<Reminder>> get reminders {
-    return userCollection.snapshots()
-      .map(_reminderListFromSnapshot);
+    return userCollection != null ? userCollection.snapshots()
+      .map(_reminderListFromSnapshot) : null;
   }
 }

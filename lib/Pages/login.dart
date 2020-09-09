@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:reminder_app/soc_icons_icons.dart';
+import 'file:///C:/Users/daksh/Desktop/Work/Android_studio/reminder_app/lib/Shared/soc_icons_icons.dart';
 import '../Functionality/conditional_builder.dart';
 import 'package:reminder_app/Functionality/auth.dart';
 import 'package:reminder_app/Shared/Loading.dart';
@@ -213,6 +213,7 @@ class _login_pageState extends State<login_page> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         FloatingActionButton(
+                            heroTag:'google',
                             onPressed: () {
                               _auth.loginWithGoogle();
                             },
@@ -221,6 +222,7 @@ class _login_pageState extends State<login_page> {
                           width: 18,
                         ),
                         FloatingActionButton(
+                          heroTag:'fb',
                           onPressed: () {
                             _auth.signInFacebook();
                           },

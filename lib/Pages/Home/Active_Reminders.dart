@@ -65,8 +65,7 @@ class _ActiveRemindersState extends State<ActiveReminders> {
                 setState(() async {
                   Scaffold.of(context).showSnackBar(
                       SnackBar(content: Text("Reminder deleted")));
-                  final user = await _auth.currentUser();
-                  DatabaseService().deleteData(remindersList[index]);
+                   DatabaseService().deleteData(remindersList[index]);
                 });
 
               } else {

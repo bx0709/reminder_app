@@ -23,6 +23,10 @@ class _ReminderAppState extends State<reminders_Home> {
     });
   }
 
+  void updateUid(){
+
+  }
+
   @override
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();

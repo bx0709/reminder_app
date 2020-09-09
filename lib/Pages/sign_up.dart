@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:reminder_app/soc_icons_icons.dart';
+import 'file:///C:/Users/daksh/Desktop/Work/Android_studio/reminder_app/lib/Shared/soc_icons_icons.dart';
 import '../Functionality/conditional_builder.dart';
 import 'package:reminder_app/Functionality/auth.dart';
 import 'package:reminder_app/Shared/Loading.dart';
@@ -27,10 +27,11 @@ class _Sign_UpState extends State<Sign_Up> {
         backgroundColor: Colors.black,
         appBar: AppBar(
           backgroundColor: Colors.black,
+          centerTitle: true,
           title: Text(
             'Reminders',
             style: TextStyle(
-              fontSize: 70,
+              fontSize: 50,
               fontFamily: 'Dancing Script',
               color: Colors.amber,
             ),
