@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:reminder_app/Functionality/Database.dart';
 import 'package:reminder_app/Models/user.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:http/http.dart' as http;
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -39,10 +42,35 @@ class AuthService {
     }
   }
 
-//sign in with
-  //sign in with email password
+//sign in with facebook
+  void signInFacebook() async {
+    FacebookLogin facebookLogin = FacebookLogin();
+
+    final result = await facebookLogin.logIn(['email', 'public_profile']);
+    final token = result.accessToken.token;
+    final graphResponse = await http.get(
+        'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name&access_token=${token}');
+    print(graphResponse.body);
+    if (result.status == FacebookLoginStatus.loggedIn) {
+      final credential = FacebookAuthProvider.getCredential(accessToken: token);
+      _auth.signInWithCredential(credential);
+    }
+  }
+
+  //sign in with google
+  final _googleSignIn = GoogleSignIn();
+  void loginWithGoogle() async {
+    final googleAccount = await _googleSignIn.signIn();
+    final googleAuth = await googleAccount.authentication;
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+        accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
+    await _auth.signInWithCredential(credential);
+  }
 
   //register with email password
+  void sign_up_email(String email, String password) {
+    _auth.createUserWithEmailAndPassword(email: email, password: password);
+  }
 
   //logout
   Future signOut() async {

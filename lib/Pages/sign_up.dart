@@ -20,7 +20,7 @@ class _Sign_UpState extends State<Sign_Up> {
   String password;
   bool emailValid;
   String Confirm_password;
-
+  AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -227,9 +227,8 @@ class _Sign_UpState extends State<Sign_Up> {
                           borderRadius: BorderRadius.circular(28.0),
                           side: BorderSide(color: Colors.amber)),
                       onPressed: () {
-                        FirebaseAuth.instance.createUserWithEmailAndPassword(
-                            email: email, password: password);
-                        print('Sign up');
+                        _auth.sign_up_email(email, password);
+                        print('Signed up');
                       },
                       textColor: Colors.white,
                       child: Text(

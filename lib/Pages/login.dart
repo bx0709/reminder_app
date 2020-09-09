@@ -27,28 +27,28 @@ class _login_pageState extends State<login_page> {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Sign_Up()));
   }
 
-  void _signInFacebook() async {
-    FacebookLogin facebookLogin = FacebookLogin();
+  // void _signInFacebook() async {
+  //   FacebookLogin facebookLogin = FacebookLogin();
 
-    final result = await facebookLogin.logIn(['email', 'public_profile']);
-    final token = result.accessToken.token;
-    final graphResponse = await http.get(
-        'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name&access_token=${token}');
-    print(graphResponse.body);
-    if (result.status == FacebookLoginStatus.loggedIn) {
-      final credential = FacebookAuthProvider.getCredential(accessToken: token);
-      FirebaseAuth.instance.signInWithCredential(credential);
-    }
-  }
+  //   final result = await facebookLogin.logIn(['email', 'public_profile']);
+  //   final token = result.accessToken.token;
+  //   final graphResponse = await http.get(
+  //       'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name&access_token=${token}');
+  //   print(graphResponse.body);
+  //   if (result.status == FacebookLoginStatus.loggedIn) {
+  //     final credential = FacebookAuthProvider.getCredential(accessToken: token);
+  //     FirebaseAuth.instance.signInWithCredential(credential);
+  //   }
+  // }
 
-  final _googleSignIn = GoogleSignIn();
-  void _loginWithGoogle() async {
-    final googleAccount = await _googleSignIn.signIn();
-    final googleAuth = await googleAccount.authentication;
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
-        accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
-    await FirebaseAuth.instance.signInWithCredential(credential);
-  }
+  // final _googleSignIn = GoogleSignIn();
+  // void _loginWithGoogle() async {
+  //   final googleAccount = await _googleSignIn.signIn();
+  //   final googleAuth = await googleAccount.authentication;
+  //   final AuthCredential credential = GoogleAuthProvider.getCredential(
+  //       accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
+  //   await FirebaseAuth.instance.signInWithCredential(credential);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -190,7 +190,7 @@ class _login_pageState extends State<login_page> {
                                   borderRadius: BorderRadius.circular(28.0),
                                   side: BorderSide(color: Colors.amber)),
                               onPressed: () {
-                                navigateToSubPage(context);
+                                Navigator.pushNamed(context, '/sign_up');
                               },
                               textColor: Colors.white,
                               child: Text(
@@ -214,7 +214,7 @@ class _login_pageState extends State<login_page> {
                       children: <Widget>[
                         FloatingActionButton(
                             onPressed: () {
-                              _loginWithGoogle();
+                              _auth.loginWithGoogle();
                             },
                             child: Image.asset('images/google.png')),
                         SizedBox(
@@ -222,7 +222,7 @@ class _login_pageState extends State<login_page> {
                         ),
                         FloatingActionButton(
                           onPressed: () {
-                            _signInFacebook();
+                            _auth.signInFacebook();
                           },
                           backgroundColor: Hexcolor("#4267B2"),
                           child: Icon(
