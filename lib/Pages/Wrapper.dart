@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reminder_app/Functionality/auth.dart';
 import 'package:reminder_app/Models/user.dart';
-import 'package:reminder_app/Pages/Authentication.dart';
 import 'package:reminder_app/Pages/Home/Reminders_Home.dart';
 import 'package:reminder_app/Functionality/Database.dart';
-import 'sign_up.dart';
 import 'login.dart';
-import 'edit_reminders.dart';
 
 class Wrapper extends StatefulWidget {
   @override
@@ -23,8 +19,7 @@ class _WrapperState extends State<Wrapper> {
     if (user == null)
       return login_page();
     else {
-      DatabaseService databaseService = new DatabaseService();
-      databaseService.setupDatabase(user.uid);
+      DatabaseService().setupDatabase(user.uid);
       return reminders_Home();
     }
   }

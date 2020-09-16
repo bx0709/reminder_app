@@ -27,10 +27,10 @@ class _Add_ReminderState extends State<Add_Reminder> {
   DateTime time = null;
   bool email = false;
   var repeat;
+  bool isCompleted = false;
   // DateTime now = new DateTime.now();
   DateTime date = DateTime.now().subtract(Duration(days: 1));
 
-  final AuthService _auth = AuthService();
   bool loading = false;
 
   @override
@@ -62,13 +62,14 @@ class _Add_ReminderState extends State<Add_Reminder> {
                 setState(() {
                   loading = true;
                 });
-                final user = await _auth.currentUser();
+
                 await DatabaseService().addData(
                     title: title,
                     notes: notes,
                     dateTime: _dateTime,
                     allDay: isTime,
-                    email: email);
+                    email: email,
+                    isCompleted: isCompleted);
                 setState(() {
                   loading = false;
                 });

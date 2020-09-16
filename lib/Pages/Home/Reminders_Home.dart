@@ -23,10 +23,6 @@ class _ReminderAppState extends State<reminders_Home> {
     });
   }
 
-  void updateUid(){
-
-  }
-
   @override
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
@@ -62,8 +58,8 @@ class _ReminderAppState extends State<reminders_Home> {
           titleSpacing: 20,
         ),
 
-        //body: _selectedIndex == 0 ? ActiveReminders(): CompletedReminders(),
-        body: ActiveReminders(),
+        body: _selectedIndex == 0 ? ActiveReminders(): CompletedReminders(),
+        //body: ActiveReminders(),
 
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[

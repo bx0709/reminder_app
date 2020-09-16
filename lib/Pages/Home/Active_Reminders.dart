@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reminder_app/Functionality/auth.dart';
 import 'package:reminder_app/Models/Reminders.dart';
 import 'package:reminder_app/Functionality/Database.dart';
 import 'package:intl/intl.dart';
-
 
 
 class ActiveReminders extends StatefulWidget {
@@ -17,11 +15,11 @@ class _ActiveRemindersState extends State<ActiveReminders> {
 
   Widget build(BuildContext context) {
 
-    final AuthService _auth = AuthService();
     final remindersList = Provider.of<List<Reminder>>(context);
 
-    if(remindersList != null)
-      print(remindersList.length);
+    for(int i = 0; i < remindersList.length; i++)
+      if(remindersList[i].isComplete)
+        remindersList.removeAt(i);
 
     return ListView.builder(
       padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -62,18 +60,16 @@ class _ActiveRemindersState extends State<ActiveReminders> {
             key: UniqueKey(),
             onDismissed: (direction) {
               if (direction == DismissDirection.startToEnd) {
-                setState(() async {
+                DatabaseService().deleteData(remindersList[index]);
+                setState(() {
                   Scaffold.of(context).showSnackBar(
                       SnackBar(content: Text("Reminder deleted")));
-                   DatabaseService().deleteData(remindersList[index]);
                 });
-
               } else {
                 Scaffold.of(context).showSnackBar(SnackBar(
                     content: Text("Reminder shifted to completed")));
                 setState(() {
-                  //reminder shifted from active to completed
-
+                  DatabaseService().completeReminder(remindersList[index]);
                 });
               }
             },

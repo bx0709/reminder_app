@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reminder_app/Functionality/Database.dart';
-import 'package:reminder_app/Functionality/auth.dart';
 import 'package:reminder_app/Models/Reminders.dart';
 import 'package:intl/intl.dart';
 
@@ -14,12 +13,15 @@ class _CompletedRemindersState extends State<CompletedReminders> {
   @override
   Widget build(BuildContext context) {
 
-    final AuthService _auth = AuthService();
-    final Reminders = Provider.of<List<Reminder>>(context);
+    final remindersList = Provider.of<List<Reminder>>(context);
+
+    for(int i = 0; i < remindersList.length; i++)
+      if(!remindersList[i].isComplete)
+        remindersList.removeAt(i);
 
     return ListView.builder(
       padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-      itemCount: Reminders.length,
+      itemCount: remindersList == null ? 0 : remindersList.length,
       itemBuilder: (context, index) {
         return Container(
           decoration: BoxDecoration(
@@ -42,29 +44,26 @@ class _CompletedRemindersState extends State<CompletedReminders> {
                 )),
             key: UniqueKey(),
             onDismissed: (direction) {
-              setState(() async {
+              DatabaseService().deleteData(remindersList[index]);
+              setState(() {
                 Scaffold.of(context).showSnackBar(
                     SnackBar(content: Text("Reminder deleted")));
-                final user = await _auth.currentUser();
-                DatabaseService().deleteData(Reminders[index]);
               });
-              Scaffold.of(context)
-                  .showSnackBar(SnackBar(content: Text("Reminder deleted")));
             },
             child: ListTile(
-              title: Text(Reminders[index].title,
+              title: Text(remindersList[index].title,
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.white,
                   )),
-              subtitle:
-              Text(DateFormat('yyyy-MM-dd – kk:mm').format(Reminders[index].dateTime),
+              subtitle:remindersList[index].dateTime != null ?
+              Text(DateFormat('dd-MM-yyyy \nkk:mm').format(remindersList[index].dateTime),
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.white,
-                  )),
-              //dense: true,
-              isThreeLine: true,
+                  )) : Text(''),
+            //dense: true,
+            isThreeLine: true,
 
               trailing: Icon(
                 Icons.done,

@@ -1,15 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:reminder_app/Models/Reminders.dart';
-import 'package:reminder_app/Functionality/auth.dart';
 import 'package:reminder_app/Models/user.dart';
 
 class DatabaseService {
   static String uid;
   static CollectionReference userCollection;
-
-  /*DatabaseService.setupDatabase({this.uid}){
-    userCollection = Firestore.instance.collection('UserID : ' + uid);
-  }*/
 
   void setupDatabase(String string){
     uid = string;
@@ -17,7 +12,7 @@ class DatabaseService {
   }
 
   // Adding new data
-  Future addData({String title, String notes, DateTime dateTime,bool allDay, bool email}) async{
+  Future addData({String title, String notes, DateTime dateTime,bool allDay, bool email, bool isCompleted}) async{
     return userCollection.document().setData({
       'title': title,
       'notes': notes,
@@ -25,13 +20,19 @@ class DatabaseService {
       'allDay': allDay,
       'email': email,
       'reminderUid': userCollection.document().documentID,
+      'isCompleted': isCompleted,
     });
   }
 
+  //complete reminder
+  Future completeReminder(Reminder r){
+    return userCollection.document(r.reminderUid).setData({'isCompleted' : true});
+  }
+
+
   // Deleting data
-  void deleteData(Reminder r) async {
-    print("--------------------"+r.reminderUid);
-    await userCollection.document(r.reminderUid).delete();
+  Future<void> deleteData(Reminder r) async {
+    return await userCollection.document(r.reminderUid).delete();
   }
 
   //Reminder list from snapshots
@@ -48,11 +49,11 @@ class DatabaseService {
         dateTime: doc.data['dateTime'].toDate() ?? null,
         allDay: doc.data['allDay'] ?? false,
         email: doc.data['email'] ?? false,
-        reminderUid: doc.data['reminderUid'] ?? ''
+        reminderUid: doc.data['reminderUid'] ?? '',
+        isComplete: doc.data['isCompleted'] ?? false
       );
     }).toList();
   }
-
 
   Stream<List<Reminder>> get reminders {
     return userCollection != null ? userCollection.snapshots()
