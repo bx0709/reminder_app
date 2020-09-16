@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "819904747046",
+    "firebase_url": "https://reminderapp-bbc52.firebaseio.com",
+    "project_id": "reminderapp-bbc52",
+    "storage_bucket": "reminderapp-bbc52.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819904747046:android:5af0c7139a958685c8f8e7",
+        "android_client_info": {
+          "package_name": "com.example.reminder_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "819904747046-cf2sb2u8g5q2029eie3fp5sdqfon5iat.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.reminder_app",
+            "certificate_hash": "ce6e17ebf801dbe6dda81914aa6234aafd5e7c12"
+          }
+        },
+        {
+          "client_id": "819904747046-fsafk8oj5o6b1lbq7e0fg3vg73k873dg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpOoQDi-3gNnCiiaTwtLI9fHop_kM1zuc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "819904747046-fsafk8oj5o6b1lbq7e0fg3vg73k873dg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "819904747046-gjc115edj8jp0j6c4581uaic0hfgg80k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.reminderapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
