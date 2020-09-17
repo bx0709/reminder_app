@@ -17,9 +17,10 @@ class _ActiveRemindersState extends State<ActiveReminders> {
 
     final remindersList = Provider.of<List<Reminder>>(context);
 
-    for(int i = 0; i < remindersList.length; i++)
-      if(remindersList[i].isComplete)
-        remindersList.removeAt(i);
+    if(remindersList != null)
+      for(int i = 0; i < remindersList.length; i++)
+        if(remindersList[i].isComplete)
+          remindersList.removeAt(i);
 
     return ListView.builder(
       padding: EdgeInsets.fromLTRB(20, 0, 20, 0),

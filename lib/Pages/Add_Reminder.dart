@@ -7,7 +7,7 @@ import 'package:reminder_app/Models/user.dart';
 import 'package:reminder_app/Shared/Loading.dart';
 import '../Functionality/conditional_builder.dart';
 import 'package:reminder_app/main.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+//import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 enum repeat_list { Never, Daily, Weekly, Monthly, Yearly }
 
@@ -58,7 +58,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
                 color: Colors.white,
               ),
               onPressed: () async {
-                scheduleReminder(_dateTime, title, notes);
+                //scheduleReminder(_dateTime, title, notes);
                 setState(() {
                   loading = true;
                 });
@@ -489,7 +489,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
     );
   }
 
-  void scheduleReminder(DateTime scheduledNotificationDateTime, String title,
+  /*void scheduleReminder(DateTime scheduledNotificationDateTime, String title,
       String notes) async {
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
       'alarm_notif',
@@ -504,7 +504,7 @@ class _Add_ReminderState extends State<Add_Reminder> {
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin.schedule(0, title, notes,
         scheduledNotificationDateTime, platformChannelSpecifics);
-  }
+  }*/
 }
 
 //following button was added to just check
