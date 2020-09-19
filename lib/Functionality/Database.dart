@@ -13,20 +13,22 @@ class DatabaseService {
 
   // Adding new data
   Future addData({String title, String notes, DateTime dateTime,bool allDay, bool email, bool isCompleted}) async{
-    return userCollection.document().setData({
+
+    DocumentReference doc = userCollection.document();
+    return doc.setData({
       'title': title,
       'notes': notes,
       'dateTime': dateTime,
       'allDay': allDay,
       'email': email,
-      'reminderUid': userCollection.document().documentID,
+      'reminderUid': doc.documentID,
       'isCompleted': isCompleted,
     });
   }
 
   //complete reminder
   Future completeReminder(Reminder r){
-    return userCollection.document(r.reminderUid).setData({'isCompleted' : true});
+    return userCollection.document(r.reminderUid).updateData({'isCompleted' : true});
   }
 
   // Deleting data
@@ -45,7 +47,7 @@ class DatabaseService {
       return Reminder(
         title: doc.data['title'] ?? '',
         notes: doc.data['notes'] ?? '',
-        dateTime: doc.data['dateTime'].toDate() ?? null,
+        dateTime: doc.data['dateTime'] != null ? doc.data['dateTime'].toDate() : null,
         allDay: doc.data['allDay'] ?? false,
         email: doc.data['email'] ?? false,
         reminderUid: doc.data['reminderUid'] ?? '',
