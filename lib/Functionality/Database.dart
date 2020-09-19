@@ -31,6 +31,11 @@ class DatabaseService {
     return userCollection.document(r.reminderUid).updateData({'isCompleted' : true});
   }
 
+  //active reminder
+  Future activeReminder(Reminder r){
+    return userCollection.document(r.reminderUid).updateData({'isCompleted' : false});
+  }
+
   // Deleting data
   Future<void> deleteData(Reminder r) async {
     return await userCollection.document(r.reminderUid).delete();

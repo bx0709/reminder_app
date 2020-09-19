@@ -29,7 +29,7 @@ class _CompletedRemindersState extends State<CompletedReminders> {
             border: Border(bottom: BorderSide(color: Colors.grey[800])),
           ),
           child: Dismissible(
-            direction: DismissDirection.startToEnd,
+            direction: DismissDirection.horizontal,
             background: Container(
                 color: Colors.grey[900],
                 child: Row(
@@ -41,15 +41,36 @@ class _CompletedRemindersState extends State<CompletedReminders> {
                       size: 30,
                       color: Colors.red,
                     ),
+                  ])
+            ),
+            secondaryBackground: Container(
+                color: Colors.grey[900],
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Icon(
+                      Icons.notifications_active,
+                      size: 30,
+                      color: Colors.amber,
+                    ),
+                    SizedBox(width: 20),
                   ],
                 )),
             key: UniqueKey(),
             onDismissed: (direction) {
-              DatabaseService().deleteData(remindersList[index]);
-              setState(() {
-                Scaffold.of(context).showSnackBar(
-                    SnackBar(content: Text("Reminder deleted")));
-              });
+              if (direction == DismissDirection.startToEnd) {
+                DatabaseService().deleteData(remindersList[index]);
+                setState(() {
+                  Scaffold.of(context).showSnackBar(
+                      SnackBar(content: Text("Reminder deleted")));
+                });
+              } else {
+                Scaffold.of(context).showSnackBar(SnackBar(
+                    content: Text("Reminder shifted to active")));
+                setState(() {
+                  DatabaseService().activeReminder(remindersList[index]);
+                });
+              }
             },
             child: ListTile(
               title: Text(remindersList[index].title,
