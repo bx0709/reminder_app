@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:reminder_app/Models/Reminders.dart';
-import 'package:reminder_app/Models/user.dart';
 
 class DatabaseService {
   static String uid;
@@ -23,6 +22,19 @@ class DatabaseService {
       'email': email,
       'reminderUid': doc.documentID,
       'isCompleted': isCompleted,
+    });
+  }
+
+  //UpdateReminder
+  Future updateData({Reminder reminder}) async{
+
+    DocumentReference doc = userCollection.document(reminder.reminderUid);
+    return doc.updateData({
+      'title': reminder.title,
+      'notes': reminder.notes,
+      'dateTime': reminder.dateTime,
+      'allDay': reminder.allDay,
+      'email': reminder.email,
     });
   }
 
