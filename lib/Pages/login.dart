@@ -67,7 +67,7 @@ class _login_pageState extends State<login_page> {
                     child: Text(
                       'Reminders',
                       style: TextStyle(
-                        fontFamily: 'Dancing Script',
+                        //fontFamily: 'Bebas Neue',
                         color: Colors.amber,
                         fontSize: 80,
                       ),

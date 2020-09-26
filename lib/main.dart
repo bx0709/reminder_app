@@ -12,12 +12,12 @@ import 'Pages/Wrapper.dart';
 import 'Pages/login.dart';
 import 'Pages/sign_up.dart';
 import 'Pages/edit_reminders.dart';
-//import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-/*final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();*/
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 void main() async {
-  /*WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
 
   var initializationSettingsAndroid =
       AndroidInitializationSettings('ic_launcher');
@@ -34,7 +34,7 @@ void main() async {
     if (payload != null) {
       debugPrint('notification payload: ' + payload);
     }
-  });*/
+  });
   runApp(Home());
 }
 
@@ -49,6 +49,7 @@ class Home extends StatelessWidget {
           '/sign_up': (context) => Sign_Up(),
           '/reminders_home': (context) => reminders_Home(),
           '/add_reminder': (context) => Add_Reminder(),
+          '/view_reminder': (context) => ,
           '/edit_reminder': (context) => Edit_Reminder(),
         },
       ),

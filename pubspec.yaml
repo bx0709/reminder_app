@@ -37,6 +37,7 @@ dependencies:
   hexcolor: ^1.0.4
   flutter_facebook_login:
   google_sign_in:
+  flutter_local_notifications:
 
 
 dev_dependencies:

@@ -32,7 +32,7 @@ class _Sign_UpState extends State<Sign_Up> {
             'Reminders',
             style: TextStyle(
               fontSize: 50,
-              fontFamily: 'Dancing Script',
+              //fontFamily: 'Bebas Neue',
               color: Colors.amber,
             ),
           ),

@@ -69,7 +69,7 @@ class AuthService {
 
   //register with email password
   void sign_up_email(String email, String password) {
-    _auth.createUserWithEmailAndPassword(email: email, password: password);
+    FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
   }
 
   //logout

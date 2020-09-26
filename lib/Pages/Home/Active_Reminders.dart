@@ -75,6 +75,9 @@ class _ActiveRemindersState extends State<ActiveReminders> {
               }
             },
             child: ListTile(
+              onTap: (remindersList[index]){
+
+            },
               title: Text(remindersList[index].title,
                   style: TextStyle(
                     fontSize: 20,
