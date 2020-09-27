@@ -9,6 +9,7 @@ import 'package:reminder_app/Shared/Loading.dart';
 import 'Authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:reminder_app/Functionality/auth.dart';
+import '../Functionality/conditional_builder.dart';
 
 class Sign_Up extends StatefulWidget {
   @override
@@ -18,12 +19,14 @@ class Sign_Up extends StatefulWidget {
 class _Sign_UpState extends State<Sign_Up> {
   String email;
   String password;
-  bool emailValid;
+  bool emailValid = true;
+  bool password_valid = true;
   String Confirm_password;
   AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black,
         appBar: AppBar(
           backgroundColor: Colors.black,
@@ -32,7 +35,7 @@ class _Sign_UpState extends State<Sign_Up> {
             'Reminders',
             style: TextStyle(
               fontSize: 50,
-              //fontFamily: 'Bebas Neue',
+              fontFamily: 'Dancing Script',
               color: Colors.amber,
             ),
           ),
@@ -228,8 +231,12 @@ class _Sign_UpState extends State<Sign_Up> {
                           borderRadius: BorderRadius.circular(28.0),
                           side: BorderSide(color: Colors.amber)),
                       onPressed: () {
-                        _auth.sign_up_email(email, password);
-                        print('Signed up');
+                        if (Confirm_password == password) {
+                          _auth.sign_up_email(email, password);
+                          print('Signed up');
+                        } else {
+                          password_valid = false;
+                        }
                       },
                       textColor: Colors.white,
                       child: Text(
@@ -240,6 +247,52 @@ class _Sign_UpState extends State<Sign_Up> {
                       ),
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                ConditionalBuilder(
+                  condition: !emailValid,
+                  builder: (context) {
+                    return Center(
+                      child: Container(
+                        height: 30,
+                        width: 250,
+                        color: Colors.red,
+                        child: Center(
+                          child: Text(
+                            'Enter a valid email id!',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                ConditionalBuilder(
+                  condition: !password_valid,
+                  builder: (context) {
+                    return Center(
+                      child: Container(
+                        height: 30,
+                        width: 250,
+                        color: Colors.red,
+                        child: Center(
+                          child: Text(
+                            'Password not same!',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ]),
         ));
