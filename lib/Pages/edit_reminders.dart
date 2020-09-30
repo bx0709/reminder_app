@@ -3,32 +3,35 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:reminder_app/Functionality/Database.dart';
 import 'package:reminder_app/Functionality/auth.dart';
-import 'package:reminder_app/Models/user.dart';
+import 'package:reminder_app/Models/Reminders.dart';
 import 'package:reminder_app/Shared/Loading.dart';
 import '../Functionality/conditional_builder.dart';
 
-enum repeat_list { Never, Daily, Weekly, Monthly, Yearly }
+enum repeat_list {Never, Daily, Weekly, Monthly, Yearly}
 
 class Edit_Reminder extends StatefulWidget {
+
+  final Reminder r;
+  const Edit_Reminder(this.r);
+
   @override
   _Edit_ReminderState createState() => _Edit_ReminderState();
 }
 
 class _Edit_ReminderState extends State<Edit_Reminder> {
   //all variables used are defined here
-  String title = 'Title Default Fetched by Firebase';
-  String notes = 'Notes Default Fetched by Firebase';
+  /*String title = r.title;
+  String notes = 'Notes Default Fetched by Firebase';*/
   bool repeat_on = false;
   bool isSwitched = false;
   bool isTime = false;
-  DateTime _dateTime = DateTime.now();
+  /*DateTime _dateTime = DateTime.now();
   DateTime time = null;
-  bool email = false;
+  bool email = false;*/
   var repeat;
   // DateTime now = new DateTime.now();
   DateTime date = DateTime.now().subtract(Duration(days: 1));
 
-  final AuthService _auth = AuthService();
   bool loading = false;
 
   @override
@@ -56,17 +59,10 @@ class _Edit_ReminderState extends State<Edit_Reminder> {
                 color: Colors.white,
               ),
               onPressed: () async {
-                print(title + " " + notes);
                 setState(() {
                   loading = true;
                 });
-                final user = await _auth.currentUser();
-                await DatabaseService().addData(
-                    title: title,
-                    notes: notes,
-                    dateTime: _dateTime,
-                    allDay: isTime,
-                    email: email);
+                await DatabaseService().updateData(reminder: widget.r);
                 setState(() {
                   loading = false;
                 });
@@ -93,7 +89,7 @@ class _Edit_ReminderState extends State<Edit_Reminder> {
                             margin: EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0.0),
                             color: Colors.transparent,
                             child: TextFormField(
-                              initialValue: title,
+                              initialValue: widget.r.title,
                               style: TextStyle(color: Colors.white),
                               textCapitalization: TextCapitalization.sentences,
                               autofocus: true,
@@ -114,7 +110,7 @@ class _Edit_ReminderState extends State<Edit_Reminder> {
                               ),
                               onChanged: (String str) {
                                 setState(() {
-                                  title = str;
+                                  widget.r.title = str;
                                 });
                               },
                             ),
@@ -137,7 +133,7 @@ class _Edit_ReminderState extends State<Edit_Reminder> {
                             margin: EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 2.0),
                             color: Colors.transparent,
                             child: TextFormField(
-                              initialValue: notes,
+                              initialValue: widget.r.notes,
                               style: TextStyle(color: Colors.white),
                               textCapitalization: TextCapitalization.sentences,
                               keyboardType: TextInputType.multiline,
@@ -159,7 +155,7 @@ class _Edit_ReminderState extends State<Edit_Reminder> {
                               ),
                               onChanged: (String str) {
                                 setState(() {
-                                  notes = str;
+                                  widget.r.notes = str;
                                 });
                               },
                             ),
@@ -206,11 +202,11 @@ class _Edit_ReminderState extends State<Edit_Reminder> {
                                       unselectedWidgetColor: Colors.white,
                                     ),
                                     child: Checkbox(
-                                      value: email,
+                                      value: widget.r.email,
                                       activeColor: Colors.amber,
                                       onChanged: (bool value) {
                                         setState(() {
-                                          email = value;
+                                          widget.r.email = value;
                                         });
                                         // print(email);
                                       },
@@ -286,12 +282,12 @@ class _Edit_ReminderState extends State<Edit_Reminder> {
                                 ),
                                 child: CupertinoDatePicker(
                                   backgroundColor: Colors.black,
-                                  initialDateTime: _dateTime,
+                                  initialDateTime: widget.r.dateTime,
                                   use24hFormat: true,
                                   // mode: CupertinoDatePickerMode.time,
                                   onDateTimeChanged: (dateTime) {
                                     setState(() {
-                                      _dateTime = dateTime;
+                                      widget.r.dateTime = dateTime;
                                     });
                                     // print(time);
                                   },
@@ -325,7 +321,7 @@ class _Edit_ReminderState extends State<Edit_Reminder> {
                                   mode: CupertinoDatePickerMode.date,
                                   onDateTimeChanged: (dateTime) {
                                     setState(() {
-                                      _dateTime = dateTime;
+                                      widget.r.dateTime = dateTime;
                                       // date = dateTime;
                                     });
                                     // print(_dateTime);

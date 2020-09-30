@@ -9,7 +9,6 @@ import 'Pages/Home/Reminders_Home.dart';
 import 'Pages/Add_Reminder.dart';
 import 'Models/user.dart';
 import 'Pages/Wrapper.dart';
-import 'Pages/login.dart';
 import 'Pages/sign_up.dart';
 import 'Pages/edit_reminders.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -49,7 +48,6 @@ class Home extends StatelessWidget {
           '/sign_up': (context) => Sign_Up(),
           '/reminders_home': (context) => reminders_Home(),
           '/add_reminder': (context) => Add_Reminder(),
-          '/edit_reminder': (context) => Edit_Reminder(),
         },
       ),
     );

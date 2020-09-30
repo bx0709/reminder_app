@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:reminder_app/Models/Reminders.dart';
-import 'package:reminder_app/Models/user.dart';
 
 class DatabaseService {
   static String uid;
@@ -13,22 +12,41 @@ class DatabaseService {
 
   // Adding new data
   Future addData({String title, String notes, DateTime dateTime,bool allDay, bool email, bool isCompleted}) async{
-    return userCollection.document().setData({
+
+    DocumentReference doc = userCollection.document();
+    return doc.setData({
       'title': title,
       'notes': notes,
       'dateTime': dateTime,
       'allDay': allDay,
       'email': email,
-      'reminderUid': userCollection.document().documentID,
+      'reminderUid': doc.documentID,
       'isCompleted': isCompleted,
+    });
+  }
+
+  //UpdateReminder
+  Future updateData({Reminder reminder}) async{
+
+    DocumentReference doc = userCollection.document(reminder.reminderUid);
+    return doc.updateData({
+      'title': reminder.title,
+      'notes': reminder.notes,
+      'dateTime': reminder.dateTime,
+      'allDay': reminder.allDay,
+      'email': reminder.email,
     });
   }
 
   //complete reminder
   Future completeReminder(Reminder r){
-    return userCollection.document(r.reminderUid).setData({'isCompleted' : true});
+    return userCollection.document(r.reminderUid).updateData({'isCompleted' : true});
   }
 
+  //active reminder
+  Future activeReminder(Reminder r){
+    return userCollection.document(r.reminderUid).updateData({'isCompleted' : false});
+  }
 
   // Deleting data
   Future<void> deleteData(Reminder r) async {
@@ -46,7 +64,7 @@ class DatabaseService {
       return Reminder(
         title: doc.data['title'] ?? '',
         notes: doc.data['notes'] ?? '',
-        dateTime: doc.data['dateTime'].toDate() ?? null,
+        dateTime: doc.data['dateTime'] != null ? doc.data['dateTime'].toDate() : null,
         allDay: doc.data['allDay'] ?? false,
         email: doc.data['email'] ?? false,
         reminderUid: doc.data['reminderUid'] ?? '',

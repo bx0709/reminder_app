@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:reminder_app/Models/Reminders.dart';
 import 'package:reminder_app/Functionality/Database.dart';
 import 'package:intl/intl.dart';
+import 'package:reminder_app/Pages/edit_reminders.dart';
 
 
 class ActiveReminders extends StatefulWidget {
@@ -17,9 +18,10 @@ class _ActiveRemindersState extends State<ActiveReminders> {
 
     final remindersList = Provider.of<List<Reminder>>(context);
 
-    for(int i = 0; i < remindersList.length; i++)
-      if(remindersList[i].isComplete)
-        remindersList.removeAt(i);
+    if(remindersList != null)
+      for(int i = 0; i < remindersList.length; i++)
+        if(remindersList[i].isComplete)
+          remindersList.removeAt(i);
 
     return ListView.builder(
       padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -74,6 +76,10 @@ class _ActiveRemindersState extends State<ActiveReminders> {
               }
             },
             child: ListTile(
+              onTap: (){
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => Edit_Reminder(remindersList[index])));
+                },
               title: Text(remindersList[index].title,
                   style: TextStyle(
                     fontSize: 20,
@@ -87,7 +93,6 @@ class _ActiveRemindersState extends State<ActiveReminders> {
                   )) : Text(''),
               //dense: true,
               isThreeLine: true,
-
               trailing: Icon(
                 Icons.notifications,
                 color: Colors.amber,

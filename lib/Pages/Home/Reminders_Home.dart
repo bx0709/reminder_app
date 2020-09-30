@@ -51,7 +51,7 @@ class _ReminderAppState extends State<reminders_Home> {
             'Reminders',
             style: TextStyle(
               fontSize: 25,
-              fontFamily: 'Dancing Script',
+              //fontFamily: 'Bebas Neue',
               color: Colors.amber,
             ),
           ),
